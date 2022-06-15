@@ -1,0 +1,10 @@
+syntax = "proto3";
+option go_package = "../protobuf";
+import "MSAHeader.proto";
+
+
+
+message MSAMessage {
+    MSAHeader header = 1;
+    string httpBody = 2;
+}

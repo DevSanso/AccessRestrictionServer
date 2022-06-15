@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+
+option go_package = "../protobuf";
+message MSAHeader{
+    string requester_id = 1;
+    string message_uuid = 2;
+    string url = 3;
+    string method = 4;
+    int32 message_index = 5;
+    
+    enum State {
+        Error = 0;
+        Success = 1;
+    };
+    State state = 6;
+    bool is_next = 7;
+    string http_header = 8;
+}
