@@ -8,9 +8,11 @@ const rootPath = typeof process.argv[1]  === "undefined" ? process.cwd() : proce
 const srcPath = typeof process.argv[2]  === "undefined" ? `${process.cwd()}/protobuf` : process.argv[2];
 const outputPath = typeof process.argv[3]  === "undefined" ? `${process.cwd()}/pkgs` : process.argv[3];
 
+const l = (l,r) => {return {lang : l,root:r}};
+
 const supportLang = [
-    "rust",
-    "go"
+    l("rust","src"),
+    l("go","."),
 ];
 
 const makeOutPutFlag = (lang,value) => ` --${lang}_out=${value} `;
@@ -52,12 +54,14 @@ const compileProtobufAction = (iFlag,lang,outputDir,sourceFileList) => {
 
 const srcDirs = sourceDirPathListAction(srcPath);
 
-const supportLangAction = (lang) => {
+const supportLangAction = (o) => {
     srcDirs.forEach( value => {
         const filePaths = onlySourceFilePathListAction(value);
         if(filePaths.length == 0)return;
-        if(!fs.existsSync(`${outputPath}/${lang}/protobuf`))fs.mkdirSync(`${outputPath}/${lang}/protobuf`);
-        compileProtobufAction(makeIncludeFlagStrAction(srcDirs),lang,`${outputPath}/${lang}/protobuf`,filePaths);
+        if(!fs.existsSync(`${outputPath}/${o.lang}/${o.root}/proto`))
+            fs.mkdirSync(`${outputPath}/${o.lang}/${o.root}/proto`);
+
+        compileProtobufAction(makeIncludeFlagStrAction(srcDirs),o.lang,`${outputPath}/${o.lang}/${o.root}/proto`,filePaths);
     });
 }
 supportLang.forEach(supportLangAction);
