@@ -1,0 +1,11 @@
+syntax = "proto3";
+package proto;
+option go_package = "../proto";
+import "MSAHeader.proto";
+
+
+
+message MSAMessage {
+    MSAHeader header = 1;
+    string httpBody = 2;
+}
