@@ -6,7 +6,7 @@ const program = "protoc";
 
 const rootPath = typeof process.argv[1]  === "undefined" ? process.cwd() : process.argv[1];
 const srcPath = typeof process.argv[2]  === "undefined" ? `${process.cwd()}/protobuf` : process.argv[2];
-const outputPath = typeof process.argv[3]  === "undefined" ? `${process.cwd()}/pkgs` : process.argv[3];
+const outputPath = typeof process.argv[3]  === "undefined" ? `${process.cwd()}/pkgs/core` : process.argv[3];
 
 const l = (l,r) => {return {lang : l,root:r}};
 
