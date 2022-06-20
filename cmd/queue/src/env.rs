@@ -1,0 +1,3 @@
+pub static KAFKA_HOST: &str = env!("KAFKA_HOST");
+pub static THIS_TOPIC_NAME : &str = env!("ACCESS_RESTRICTION_QUEUE_TOPIC");
+pub static PROCESSING_MESSAGE_FPS : &str =  env!("ACCESS_RESTRICTION_QUEUE_PROCESSING_FPS");
