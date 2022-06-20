@@ -26,27 +26,29 @@
 const _PROTOBUF_VERSION_CHECK: () = ::protobuf::VERSION_4_0_0_ALPHA_0;
 
 #[derive(PartialEq,Clone,Default,Debug)]
-// @@protoc_insertion_point(message:MSAHeader)
+// @@protoc_insertion_point(message:proto.MSAHeader)
 pub struct MSAHeader {
     // message fields
-    // @@protoc_insertion_point(field:MSAHeader.requester_id)
+    // @@protoc_insertion_point(field:proto.MSAHeader.requester_id)
     pub requester_id: ::std::string::String,
-    // @@protoc_insertion_point(field:MSAHeader.message_uuid)
+    // @@protoc_insertion_point(field:proto.MSAHeader.message_uuid)
     pub message_uuid: ::std::string::String,
-    // @@protoc_insertion_point(field:MSAHeader.url)
+    // @@protoc_insertion_point(field:proto.MSAHeader.type)
+    pub type_: ::protobuf::EnumOrUnknown<msaheader::Type>,
+    // @@protoc_insertion_point(field:proto.MSAHeader.url)
     pub url: ::std::string::String,
-    // @@protoc_insertion_point(field:MSAHeader.method)
+    // @@protoc_insertion_point(field:proto.MSAHeader.method)
     pub method: ::std::string::String,
-    // @@protoc_insertion_point(field:MSAHeader.message_index)
+    // @@protoc_insertion_point(field:proto.MSAHeader.message_index)
     pub message_index: i32,
-    // @@protoc_insertion_point(field:MSAHeader.state)
+    // @@protoc_insertion_point(field:proto.MSAHeader.state)
     pub state: ::protobuf::EnumOrUnknown<msaheader::State>,
-    // @@protoc_insertion_point(field:MSAHeader.is_next)
+    // @@protoc_insertion_point(field:proto.MSAHeader.is_next)
     pub is_next: bool,
-    // @@protoc_insertion_point(field:MSAHeader.http_header)
+    // @@protoc_insertion_point(field:proto.MSAHeader.http_header)
     pub http_header: ::std::string::String,
     // special fields
-    // @@protoc_insertion_point(special_field:MSAHeader.special_fields)
+    // @@protoc_insertion_point(special_field:proto.MSAHeader.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
 }
 
@@ -62,7 +64,7 @@ impl MSAHeader {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(8);
+        let mut fields = ::std::vec::Vec::with_capacity(9);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "requester_id",
@@ -73,6 +75,11 @@ impl MSAHeader {
             "message_uuid",
             |m: &MSAHeader| { &m.message_uuid },
             |m: &mut MSAHeader| { &mut m.message_uuid },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "type",
+            |m: &MSAHeader| { &m.type_ },
+            |m: &mut MSAHeader| { &mut m.type_ },
         ));
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "url",
@@ -128,22 +135,25 @@ impl ::protobuf::Message for MSAHeader {
                 18 => {
                     self.message_uuid = is.read_string()?;
                 },
-                26 => {
-                    self.url = is.read_string()?;
+                24 => {
+                    self.type_ = is.read_enum_or_unknown()?;
                 },
                 34 => {
+                    self.url = is.read_string()?;
+                },
+                42 => {
                     self.method = is.read_string()?;
                 },
-                40 => {
+                48 => {
                     self.message_index = is.read_int32()?;
                 },
-                48 => {
+                56 => {
                     self.state = is.read_enum_or_unknown()?;
                 },
-                56 => {
+                64 => {
                     self.is_next = is.read_bool()?;
                 },
-                66 => {
+                74 => {
                     self.http_header = is.read_string()?;
                 },
                 tag => {
@@ -164,23 +174,26 @@ impl ::protobuf::Message for MSAHeader {
         if !self.message_uuid.is_empty() {
             my_size += ::protobuf::rt::string_size(2, &self.message_uuid);
         }
+        if self.type_ != ::protobuf::EnumOrUnknown::new(msaheader::Type::General) {
+            my_size += ::protobuf::rt::int32_size(3, self.type_.value());
+        }
         if !self.url.is_empty() {
-            my_size += ::protobuf::rt::string_size(3, &self.url);
+            my_size += ::protobuf::rt::string_size(4, &self.url);
         }
         if !self.method.is_empty() {
-            my_size += ::protobuf::rt::string_size(4, &self.method);
+            my_size += ::protobuf::rt::string_size(5, &self.method);
         }
         if self.message_index != 0 {
-            my_size += ::protobuf::rt::int32_size(5, self.message_index);
+            my_size += ::protobuf::rt::int32_size(6, self.message_index);
         }
         if self.state != ::protobuf::EnumOrUnknown::new(msaheader::State::Error) {
-            my_size += ::protobuf::rt::int32_size(6, self.state.value());
+            my_size += ::protobuf::rt::int32_size(7, self.state.value());
         }
         if self.is_next != false {
             my_size += 1 + 1;
         }
         if !self.http_header.is_empty() {
-            my_size += ::protobuf::rt::string_size(8, &self.http_header);
+            my_size += ::protobuf::rt::string_size(9, &self.http_header);
         }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
@@ -194,23 +207,26 @@ impl ::protobuf::Message for MSAHeader {
         if !self.message_uuid.is_empty() {
             os.write_string(2, &self.message_uuid)?;
         }
+        if self.type_ != ::protobuf::EnumOrUnknown::new(msaheader::Type::General) {
+            os.write_enum(3, ::protobuf::EnumOrUnknown::value(&self.type_))?;
+        }
         if !self.url.is_empty() {
-            os.write_string(3, &self.url)?;
+            os.write_string(4, &self.url)?;
         }
         if !self.method.is_empty() {
-            os.write_string(4, &self.method)?;
+            os.write_string(5, &self.method)?;
         }
         if self.message_index != 0 {
-            os.write_int32(5, self.message_index)?;
+            os.write_int32(6, self.message_index)?;
         }
         if self.state != ::protobuf::EnumOrUnknown::new(msaheader::State::Error) {
-            os.write_enum(6, ::protobuf::EnumOrUnknown::value(&self.state))?;
+            os.write_enum(7, ::protobuf::EnumOrUnknown::value(&self.state))?;
         }
         if self.is_next != false {
-            os.write_bool(7, self.is_next)?;
+            os.write_bool(8, self.is_next)?;
         }
         if !self.http_header.is_empty() {
-            os.write_string(8, &self.http_header)?;
+            os.write_string(9, &self.http_header)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -231,6 +247,7 @@ impl ::protobuf::Message for MSAHeader {
     fn clear(&mut self) {
         self.requester_id.clear();
         self.message_uuid.clear();
+        self.type_ = ::protobuf::EnumOrUnknown::new(msaheader::Type::General);
         self.url.clear();
         self.method.clear();
         self.message_index = 0;
@@ -244,6 +261,7 @@ impl ::protobuf::Message for MSAHeader {
         static instance: MSAHeader = MSAHeader {
             requester_id: ::std::string::String::new(),
             message_uuid: ::std::string::String::new(),
+            type_: ::protobuf::EnumOrUnknown::from_i32(0),
             url: ::std::string::String::new(),
             method: ::std::string::String::new(),
             message_index: 0,
@@ -276,11 +294,65 @@ impl ::protobuf::reflect::ProtobufValue for MSAHeader {
 /// Nested message and enums of message `MSAHeader`
 pub mod msaheader {
     #[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
-    // @@protoc_insertion_point(enum:MSAHeader.State)
+    // @@protoc_insertion_point(enum:proto.MSAHeader.Type)
+    pub enum Type {
+        // @@protoc_insertion_point(enum_value:proto.MSAHeader.Type.General)
+        General = 0,
+        // @@protoc_insertion_point(enum_value:proto.MSAHeader.Type.LinkRequest)
+        LinkRequest = 1,
+    }
+
+    impl ::protobuf::Enum for Type {
+        const NAME: &'static str = "Type";
+
+        fn value(&self) -> i32 {
+            *self as i32
+        }
+
+        fn from_i32(value: i32) -> ::std::option::Option<Type> {
+            match value {
+                0 => ::std::option::Option::Some(Type::General),
+                1 => ::std::option::Option::Some(Type::LinkRequest),
+                _ => ::std::option::Option::None
+            }
+        }
+
+        const VALUES: &'static [Type] = &[
+            Type::General,
+            Type::LinkRequest,
+        ];
+    }
+
+    impl ::protobuf::EnumFull for Type {
+        fn enum_descriptor() -> ::protobuf::reflect::EnumDescriptor {
+            static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::EnumDescriptor> = ::protobuf::rt::Lazy::new();
+            descriptor.get(|| super::file_descriptor().enum_by_package_relative_name("MSAHeader.Type").unwrap()).clone()
+        }
+
+        fn descriptor(&self) -> ::protobuf::reflect::EnumValueDescriptor {
+            let index = *self as usize;
+            Self::enum_descriptor().value_by_index(index)
+        }
+    }
+
+    impl ::std::default::Default for Type {
+        fn default() -> Self {
+            Type::General
+        }
+    }
+
+    impl Type {
+        pub(in super) fn generated_enum_descriptor_data() -> ::protobuf::reflect::GeneratedEnumDescriptorData {
+            ::protobuf::reflect::GeneratedEnumDescriptorData::new::<Type>("MSAHeader.Type")
+        }
+    }
+
+    #[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
+    // @@protoc_insertion_point(enum:proto.MSAHeader.State)
     pub enum State {
-        // @@protoc_insertion_point(enum_value:MSAHeader.State.Error)
+        // @@protoc_insertion_point(enum_value:proto.MSAHeader.State.Error)
         Error = 0,
-        // @@protoc_insertion_point(enum_value:MSAHeader.State.Success)
+        // @@protoc_insertion_point(enum_value:proto.MSAHeader.State.Success)
         Success = 1,
     }
 
@@ -331,45 +403,56 @@ pub mod msaheader {
 }
 
 static file_descriptor_proto_data: &'static [u8] = b"\
-    \n\x0fMSAHeader.proto\"\xa3\x02\n\tMSAHeader\x12!\n\x0crequester_id\x18\
-    \x01\x20\x01(\tR\x0brequesterId\x12!\n\x0cmessage_uuid\x18\x02\x20\x01(\
-    \tR\x0bmessageUuid\x12\x10\n\x03url\x18\x03\x20\x01(\tR\x03url\x12\x16\n\
-    \x06method\x18\x04\x20\x01(\tR\x06method\x12#\n\rmessage_index\x18\x05\
-    \x20\x01(\x05R\x0cmessageIndex\x12&\n\x05state\x18\x06\x20\x01(\x0e2\x10\
-    .MSAHeader.StateR\x05state\x12\x17\n\x07is_next\x18\x07\x20\x01(\x08R\
-    \x06isNext\x12\x1f\n\x0bhttp_header\x18\x08\x20\x01(\tR\nhttpHeader\"\
-    \x1f\n\x05State\x12\t\n\x05Error\x10\0\x12\x0b\n\x07Success\x10\x01B\nZ\
-    \x08../protoJ\xf1\x04\n\x06\x12\x04\0\0\x12\x01\n\x08\n\x01\x0c\x12\x03\
-    \0\0\x12\n\x08\n\x01\x08\x12\x03\x03\0\x1f\n\t\n\x02\x08\x0b\x12\x03\x03\
-    \0\x1f\n\n\n\x02\x04\0\x12\x04\x04\0\x12\x01\n\n\n\x03\x04\0\x01\x12\x03\
-    \x04\x08\x11\n\x0b\n\x04\x04\0\x02\0\x12\x03\x05\x04\x1c\n\x0c\n\x05\x04\
-    \0\x02\0\x05\x12\x03\x05\x04\n\n\x0c\n\x05\x04\0\x02\0\x01\x12\x03\x05\
-    \x0b\x17\n\x0c\n\x05\x04\0\x02\0\x03\x12\x03\x05\x1a\x1b\n\x0b\n\x04\x04\
-    \0\x02\x01\x12\x03\x06\x04\x1c\n\x0c\n\x05\x04\0\x02\x01\x05\x12\x03\x06\
-    \x04\n\n\x0c\n\x05\x04\0\x02\x01\x01\x12\x03\x06\x0b\x17\n\x0c\n\x05\x04\
-    \0\x02\x01\x03\x12\x03\x06\x1a\x1b\n\x0b\n\x04\x04\0\x02\x02\x12\x03\x07\
-    \x04\x13\n\x0c\n\x05\x04\0\x02\x02\x05\x12\x03\x07\x04\n\n\x0c\n\x05\x04\
-    \0\x02\x02\x01\x12\x03\x07\x0b\x0e\n\x0c\n\x05\x04\0\x02\x02\x03\x12\x03\
-    \x07\x11\x12\n\x0b\n\x04\x04\0\x02\x03\x12\x03\x08\x04\x16\n\x0c\n\x05\
-    \x04\0\x02\x03\x05\x12\x03\x08\x04\n\n\x0c\n\x05\x04\0\x02\x03\x01\x12\
-    \x03\x08\x0b\x11\n\x0c\n\x05\x04\0\x02\x03\x03\x12\x03\x08\x14\x15\n\x0b\
-    \n\x04\x04\0\x02\x04\x12\x03\t\x04\x1c\n\x0c\n\x05\x04\0\x02\x04\x05\x12\
-    \x03\t\x04\t\n\x0c\n\x05\x04\0\x02\x04\x01\x12\x03\t\n\x17\n\x0c\n\x05\
-    \x04\0\x02\x04\x03\x12\x03\t\x1a\x1b\n\x0c\n\x04\x04\0\x04\0\x12\x04\x0b\
-    \x04\x0e\x05\n\x0c\n\x05\x04\0\x04\0\x01\x12\x03\x0b\t\x0e\n\r\n\x06\x04\
-    \0\x04\0\x02\0\x12\x03\x0c\x08\x12\n\x0e\n\x07\x04\0\x04\0\x02\0\x01\x12\
-    \x03\x0c\x08\r\n\x0e\n\x07\x04\0\x04\0\x02\0\x02\x12\x03\x0c\x10\x11\n\r\
-    \n\x06\x04\0\x04\0\x02\x01\x12\x03\r\x08\x14\n\x0e\n\x07\x04\0\x04\0\x02\
-    \x01\x01\x12\x03\r\x08\x0f\n\x0e\n\x07\x04\0\x04\0\x02\x01\x02\x12\x03\r\
-    \x12\x13\n\x0b\n\x04\x04\0\x02\x05\x12\x03\x0f\x04\x14\n\x0c\n\x05\x04\0\
-    \x02\x05\x06\x12\x03\x0f\x04\t\n\x0c\n\x05\x04\0\x02\x05\x01\x12\x03\x0f\
-    \n\x0f\n\x0c\n\x05\x04\0\x02\x05\x03\x12\x03\x0f\x12\x13\n\x0b\n\x04\x04\
-    \0\x02\x06\x12\x03\x10\x04\x15\n\x0c\n\x05\x04\0\x02\x06\x05\x12\x03\x10\
-    \x04\x08\n\x0c\n\x05\x04\0\x02\x06\x01\x12\x03\x10\t\x10\n\x0c\n\x05\x04\
-    \0\x02\x06\x03\x12\x03\x10\x13\x14\n\x0b\n\x04\x04\0\x02\x07\x12\x03\x11\
-    \x04\x1b\n\x0c\n\x05\x04\0\x02\x07\x05\x12\x03\x11\x04\n\n\x0c\n\x05\x04\
-    \0\x02\x07\x01\x12\x03\x11\x0b\x16\n\x0c\n\x05\x04\0\x02\x07\x03\x12\x03\
-    \x11\x19\x1ab\x06proto3\
+    \n\x0fMSAHeader.proto\x12\x05proto\"\xfa\x02\n\tMSAHeader\x12!\n\x0crequ\
+    ester_id\x18\x01\x20\x01(\tR\x0brequesterId\x12!\n\x0cmessage_uuid\x18\
+    \x02\x20\x01(\tR\x0bmessageUuid\x12)\n\x04type\x18\x03\x20\x01(\x0e2\x15\
+    .proto.MSAHeader.TypeR\x04type\x12\x10\n\x03url\x18\x04\x20\x01(\tR\x03u\
+    rl\x12\x16\n\x06method\x18\x05\x20\x01(\tR\x06method\x12#\n\rmessage_ind\
+    ex\x18\x06\x20\x01(\x05R\x0cmessageIndex\x12,\n\x05state\x18\x07\x20\x01\
+    (\x0e2\x16.proto.MSAHeader.StateR\x05state\x12\x17\n\x07is_next\x18\x08\
+    \x20\x01(\x08R\x06isNext\x12\x1f\n\x0bhttp_header\x18\t\x20\x01(\tR\nhtt\
+    pHeader\"$\n\x04Type\x12\x0b\n\x07General\x10\0\x12\x0f\n\x0bLinkRequest\
+    \x10\x01\"\x1f\n\x05State\x12\t\n\x05Error\x10\0\x12\x0b\n\x07Success\
+    \x10\x01B\nZ\x08../protoJ\xac\x06\n\x06\x12\x04\0\0\x17\x01\n\x08\n\x01\
+    \x0c\x12\x03\0\0\x12\n\x08\n\x01\x02\x12\x03\x01\0\x0e\n\x08\n\x01\x08\
+    \x12\x03\x03\0\x1f\n\t\n\x02\x08\x0b\x12\x03\x03\0\x1f\n\n\n\x02\x04\0\
+    \x12\x04\x04\0\x17\x01\n\n\n\x03\x04\0\x01\x12\x03\x04\x08\x11\n\x0b\n\
+    \x04\x04\0\x02\0\x12\x03\x05\x04\x1c\n\x0c\n\x05\x04\0\x02\0\x05\x12\x03\
+    \x05\x04\n\n\x0c\n\x05\x04\0\x02\0\x01\x12\x03\x05\x0b\x17\n\x0c\n\x05\
+    \x04\0\x02\0\x03\x12\x03\x05\x1a\x1b\n\x0b\n\x04\x04\0\x02\x01\x12\x03\
+    \x06\x04\x1c\n\x0c\n\x05\x04\0\x02\x01\x05\x12\x03\x06\x04\n\n\x0c\n\x05\
+    \x04\0\x02\x01\x01\x12\x03\x06\x0b\x17\n\x0c\n\x05\x04\0\x02\x01\x03\x12\
+    \x03\x06\x1a\x1b\n\x0c\n\x04\x04\0\x04\0\x12\x04\x07\x04\n\x05\n\x0c\n\
+    \x05\x04\0\x04\0\x01\x12\x03\x07\t\r\n\r\n\x06\x04\0\x04\0\x02\0\x12\x03\
+    \x08\x08\x14\n\x0e\n\x07\x04\0\x04\0\x02\0\x01\x12\x03\x08\x08\x0f\n\x0e\
+    \n\x07\x04\0\x04\0\x02\0\x02\x12\x03\x08\x12\x13\n\r\n\x06\x04\0\x04\0\
+    \x02\x01\x12\x03\t\x08\x18\n\x0e\n\x07\x04\0\x04\0\x02\x01\x01\x12\x03\t\
+    \x08\x13\n\x0e\n\x07\x04\0\x04\0\x02\x01\x02\x12\x03\t\x16\x17\n\x0b\n\
+    \x04\x04\0\x02\x02\x12\x03\x0b\x04\x12\n\x0c\n\x05\x04\0\x02\x02\x06\x12\
+    \x03\x0b\x04\x08\n\x0c\n\x05\x04\0\x02\x02\x01\x12\x03\x0b\t\r\n\x0c\n\
+    \x05\x04\0\x02\x02\x03\x12\x03\x0b\x10\x11\n\x0b\n\x04\x04\0\x02\x03\x12\
+    \x03\x0c\x04\x13\n\x0c\n\x05\x04\0\x02\x03\x05\x12\x03\x0c\x04\n\n\x0c\n\
+    \x05\x04\0\x02\x03\x01\x12\x03\x0c\x0b\x0e\n\x0c\n\x05\x04\0\x02\x03\x03\
+    \x12\x03\x0c\x11\x12\n\x0b\n\x04\x04\0\x02\x04\x12\x03\r\x04\x16\n\x0c\n\
+    \x05\x04\0\x02\x04\x05\x12\x03\r\x04\n\n\x0c\n\x05\x04\0\x02\x04\x01\x12\
+    \x03\r\x0b\x11\n\x0c\n\x05\x04\0\x02\x04\x03\x12\x03\r\x14\x15\n\x0b\n\
+    \x04\x04\0\x02\x05\x12\x03\x0e\x04\x1c\n\x0c\n\x05\x04\0\x02\x05\x05\x12\
+    \x03\x0e\x04\t\n\x0c\n\x05\x04\0\x02\x05\x01\x12\x03\x0e\n\x17\n\x0c\n\
+    \x05\x04\0\x02\x05\x03\x12\x03\x0e\x1a\x1b\n\x0c\n\x04\x04\0\x04\x01\x12\
+    \x04\x10\x04\x13\x05\n\x0c\n\x05\x04\0\x04\x01\x01\x12\x03\x10\t\x0e\n\r\
+    \n\x06\x04\0\x04\x01\x02\0\x12\x03\x11\x08\x12\n\x0e\n\x07\x04\0\x04\x01\
+    \x02\0\x01\x12\x03\x11\x08\r\n\x0e\n\x07\x04\0\x04\x01\x02\0\x02\x12\x03\
+    \x11\x10\x11\n\r\n\x06\x04\0\x04\x01\x02\x01\x12\x03\x12\x08\x14\n\x0e\n\
+    \x07\x04\0\x04\x01\x02\x01\x01\x12\x03\x12\x08\x0f\n\x0e\n\x07\x04\0\x04\
+    \x01\x02\x01\x02\x12\x03\x12\x12\x13\n\x0b\n\x04\x04\0\x02\x06\x12\x03\
+    \x14\x04\x14\n\x0c\n\x05\x04\0\x02\x06\x06\x12\x03\x14\x04\t\n\x0c\n\x05\
+    \x04\0\x02\x06\x01\x12\x03\x14\n\x0f\n\x0c\n\x05\x04\0\x02\x06\x03\x12\
+    \x03\x14\x12\x13\n\x0b\n\x04\x04\0\x02\x07\x12\x03\x15\x04\x15\n\x0c\n\
+    \x05\x04\0\x02\x07\x05\x12\x03\x15\x04\x08\n\x0c\n\x05\x04\0\x02\x07\x01\
+    \x12\x03\x15\t\x10\n\x0c\n\x05\x04\0\x02\x07\x03\x12\x03\x15\x13\x14\n\
+    \x0b\n\x04\x04\0\x02\x08\x12\x03\x16\x04\x1b\n\x0c\n\x05\x04\0\x02\x08\
+    \x05\x12\x03\x16\x04\n\n\x0c\n\x05\x04\0\x02\x08\x01\x12\x03\x16\x0b\x16\
+    \n\x0c\n\x05\x04\0\x02\x08\x03\x12\x03\x16\x19\x1ab\x06proto3\
 ";
 
 /// `FileDescriptorProto` object which was a source for this generated file
@@ -389,7 +472,8 @@ pub fn file_descriptor() -> &'static ::protobuf::reflect::FileDescriptor {
             let mut deps = ::std::vec::Vec::with_capacity(0);
             let mut messages = ::std::vec::Vec::with_capacity(1);
             messages.push(MSAHeader::generated_message_descriptor_data());
-            let mut enums = ::std::vec::Vec::with_capacity(1);
+            let mut enums = ::std::vec::Vec::with_capacity(2);
+            enums.push(msaheader::Type::generated_enum_descriptor_data());
             enums.push(msaheader::State::generated_enum_descriptor_data());
             ::protobuf::reflect::GeneratedFileDescriptor::new_generated(
                 file_descriptor_proto(),

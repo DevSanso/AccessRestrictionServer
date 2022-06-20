@@ -6,13 +6,14 @@ const program = "protoc";
 
 const rootPath = typeof process.argv[1]  === "undefined" ? process.cwd() : process.argv[1];
 const srcPath = typeof process.argv[2]  === "undefined" ? `${process.cwd()}/protobuf` : process.argv[2];
-const outputPath = typeof process.argv[3]  === "undefined" ? `${process.cwd()}/pkgs` : process.argv[3];
+const outputPath = typeof process.argv[3]  === "undefined" ? `${process.cwd()}/pkgs/core` : process.argv[3];
 
-const l = (l,r) => {return {lang : l,root:r}};
+const l = (l,r,is) => {return {lang : l,root:r,isWriteProtoDir : is}};
 
 const supportLang = [
-    l("rust","src"),
-    l("go","."),
+    l("rust","src",true),
+    l("go",".",true),
+    l("kotlin","src/main/kotlin",false)
 ];
 
 const makeOutPutFlag = (lang,value) => ` --${lang}_out=${value} `;
@@ -61,7 +62,12 @@ const supportLangAction = (o) => {
         if(!fs.existsSync(`${outputPath}/${o.lang}/${o.root}/proto`))
             fs.mkdirSync(`${outputPath}/${o.lang}/${o.root}/proto`);
 
-        compileProtobufAction(makeIncludeFlagStrAction(srcDirs),o.lang,`${outputPath}/${o.lang}/${o.root}/proto`,filePaths);
+        compileProtobufAction(
+            makeIncludeFlagStrAction(srcDirs),
+            o.lang,
+            `${outputPath}/${o.lang}/${o.root}/${o.isWriteProtoDir ? "proto" : "."}`,
+            filePaths
+        );
     });
 }
 supportLang.forEach(supportLangAction);
