@@ -1,4 +1,4 @@
-module pkgs
+module accessRestrictionCore
 
 go 1.18
 
