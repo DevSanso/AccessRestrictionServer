@@ -57,7 +57,24 @@ object MSAHeaderKt {
     }
 
     /**
-     * <code>string url = 3;</code>
+     * <code>.proto.MSAHeader.Type type = 3;</code>
+     */
+     var type: proto.MSAHeaderOuterClass.MSAHeader.Type
+      @JvmName("getType")
+      get() = _builder.getType()
+      @JvmName("setType")
+      set(value) {
+        _builder.setType(value)
+      }
+    /**
+     * <code>.proto.MSAHeader.Type type = 3;</code>
+     */
+    fun clearType() {
+      _builder.clearType()
+    }
+
+    /**
+     * <code>string url = 4;</code>
      */
     var url: kotlin.String
       @JvmName("getUrl")
@@ -67,14 +84,14 @@ object MSAHeaderKt {
         _builder.setUrl(value)
       }
     /**
-     * <code>string url = 3;</code>
+     * <code>string url = 4;</code>
      */
     fun clearUrl() {
       _builder.clearUrl()
     }
 
     /**
-     * <code>string method = 4;</code>
+     * <code>string method = 5;</code>
      */
     var method: kotlin.String
       @JvmName("getMethod")
@@ -84,14 +101,14 @@ object MSAHeaderKt {
         _builder.setMethod(value)
       }
     /**
-     * <code>string method = 4;</code>
+     * <code>string method = 5;</code>
      */
     fun clearMethod() {
       _builder.clearMethod()
     }
 
     /**
-     * <code>int32 message_index = 5;</code>
+     * <code>int32 message_index = 6;</code>
      */
     var messageIndex: kotlin.Int
       @JvmName("getMessageIndex")
@@ -101,14 +118,14 @@ object MSAHeaderKt {
         _builder.setMessageIndex(value)
       }
     /**
-     * <code>int32 message_index = 5;</code>
+     * <code>int32 message_index = 6;</code>
      */
     fun clearMessageIndex() {
       _builder.clearMessageIndex()
     }
 
     /**
-     * <code>.proto.MSAHeader.State state = 6;</code>
+     * <code>.proto.MSAHeader.State state = 7;</code>
      */
      var state: proto.MSAHeaderOuterClass.MSAHeader.State
       @JvmName("getState")
@@ -118,14 +135,14 @@ object MSAHeaderKt {
         _builder.setState(value)
       }
     /**
-     * <code>.proto.MSAHeader.State state = 6;</code>
+     * <code>.proto.MSAHeader.State state = 7;</code>
      */
     fun clearState() {
       _builder.clearState()
     }
 
     /**
-     * <code>bool is_next = 7;</code>
+     * <code>bool is_next = 8;</code>
      */
     var isNext: kotlin.Boolean
       @JvmName("getIsNext")
@@ -135,14 +152,14 @@ object MSAHeaderKt {
         _builder.setIsNext(value)
       }
     /**
-     * <code>bool is_next = 7;</code>
+     * <code>bool is_next = 8;</code>
      */
     fun clearIsNext() {
       _builder.clearIsNext()
     }
 
     /**
-     * <code>string http_header = 8;</code>
+     * <code>string http_header = 9;</code>
      */
     var httpHeader: kotlin.String
       @JvmName("getHttpHeader")
@@ -152,7 +169,7 @@ object MSAHeaderKt {
         _builder.setHttpHeader(value)
       }
     /**
-     * <code>string http_header = 8;</code>
+     * <code>string http_header = 9;</code>
      */
     fun clearHttpHeader() {
       _builder.clearHttpHeader()
