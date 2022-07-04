@@ -9,7 +9,7 @@ public class ContainerEntity {
     @Column
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int id;
+    public Long id;
     @Column(name="process_name")
     public String processName;
     @Column
