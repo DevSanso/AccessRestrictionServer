@@ -1,4 +1,4 @@
-package parser
+package protobuf
 
 import parser "google.golang.org/protobuf/proto"
 import  "core/proto"
