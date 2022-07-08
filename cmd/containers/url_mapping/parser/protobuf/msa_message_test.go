@@ -3,13 +3,14 @@ package protobuf_test
 import (
 	"testing"
 	"url_mapping/parser/protobuf"
-	"core/proto"
+	 "core/proto"
+	"url_mapping/utils/tests"
 )
 
 
 
 func TestMessage(t *testing.T) {
-	header := newHeader()
+	header := tests.NewHeader()
 	message := &proto.MSAMessage{}
 	message.Header = header
 	message.HttpBody = "hello world"
@@ -24,7 +25,7 @@ func TestMessage(t *testing.T) {
 		t.Error(err)
 		return
 	}
-	if !headerEq(encodeMessage.GetHeader()){
+	if !tests.HeaderEq(encodeMessage.GetHeader(),header){
 		t.Error("not eq header data")
 		t.Fail()
 	}
