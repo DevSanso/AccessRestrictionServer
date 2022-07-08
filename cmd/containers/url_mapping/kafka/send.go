@@ -1,11 +1,9 @@
 package kafka
 
-
 import (
 	"sync"
+
 	"github.com/confluentinc/confluent-kafka-go/kafka"
-
-
 
 	"core/proto"
 	"url_mapping/config"
@@ -16,7 +14,7 @@ var once sync.Once
 
 func initProducer() {
 	p,err := kafka.NewProducer(&kafka.ConfigMap{
-		"bootstrap.servers": config.KafkaHost,
+		"bootstrap.servers": config.KafkaAddr, 
 	});
 	if err != nil {
 		panic(err)
@@ -32,7 +30,7 @@ func makeKafkaMessage(message []byte) *kafka.Message {
 }
 func SendMessage(message *proto.MSAMessage) error {
 	once.Do(initProducer)
-	
+	defer producer.Flush(1000)
 	data,err := protobuf.DecodeMessage(message)
 	if err != nil {return err}
 

@@ -11,13 +11,13 @@ import (
 )
 
 type RecvMessage struct {
-	message proto.MSAMessage
-	err error
+	Message proto.MSAMessage
+	Err error
 }
 
 func mkKafkaConfig() *kafka.ConfigMap {
 	return &kafka.ConfigMap{
-		"bootstrap.servers": config.KafkaHost,
+		"bootstrap.servers": config.KafkaAddr,
 		"group.id": config.KafkaGroup,
 	}
 }
@@ -32,7 +32,7 @@ func loop(runningflag *bool,c *kafka.Consumer,channel chan RecvMessage) {
 	for *runningflag {
 		msg ,err := c.ReadMessage(-1)
 		if err != nil {
-			channel <- RecvMessage{err : err}
+			channel <- RecvMessage{Err : err}
 			continue
 		}
 		encodeMsg,encodeErr := protobuf.EncodeMessage(msg.Value)
@@ -41,6 +41,7 @@ func loop(runningflag *bool,c *kafka.Consumer,channel chan RecvMessage) {
 			encodeErr,
 		}
 	}
+	c.Close()
 }
 
 func RecvStream() (channel <-chan RecvMessage,close func()) {
