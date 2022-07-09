@@ -1,14 +1,12 @@
 package kafka_test
 
-
 import (
+	"core/kafka"
 	"testing"
-	"url_mapping/kafka"
-
 )
 
 func TestRecvStreamConnect(t *testing.T) {
-	_ ,close := kafka.RecvStream()
+	_, close := kafka.RecvStream()
 	close()
-	
+
 }

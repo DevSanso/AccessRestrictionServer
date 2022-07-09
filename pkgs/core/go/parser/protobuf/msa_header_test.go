@@ -2,8 +2,8 @@ package protobuf_test
 
 import (
 	"testing"
-	"url_mapping/parser/protobuf"
-	"url_mapping/utils/tests"
+	"core/parser/protobuf"
+	"core/utils/tests"
 )
 
 
