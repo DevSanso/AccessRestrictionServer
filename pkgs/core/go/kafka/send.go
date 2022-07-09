@@ -1,10 +1,12 @@
 package kafka
 
 import (
-	"sync"
-	"github.com/confluentinc/confluent-kafka-go/kafka"
 	"core/parser/protobuf"
 	"core/proto"
+	"core/utils/message"
+	"sync"
+
+	"github.com/confluentinc/confluent-kafka-go/kafka"
 )
 
 var producer *kafka.Producer
@@ -41,4 +43,11 @@ func SendMessage(message *proto.MSAMessage) error {
 	}
 
 	return producer.Produce(makeKafkaMessage(data), nil)
+}
+func LinkGateway(name string,level int) error {
+	defer producer.Flush(1000)
+	linkMess := message.LinkMessage(name,level)
+	data,err := protobuf.DecodeMessage(&linkMess)
+	if err != nil {return err}
+	return producer.Produce(makeKafkaMessage(data),nil)
 }

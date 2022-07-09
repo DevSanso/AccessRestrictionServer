@@ -24,7 +24,9 @@ func sendOkMessage(origin *proto.MSAMessage,levels []int)error {
 
 func main() {
 	log.Println("Start Url Mapping Container")
-
+	linkErr := kafka.LinkGateway("url_mapping",1)
+	if linkErr != nil {panic(linkErr)}
+	
 	for msg := range recvStream {
 		if msg.Err != nil {log.Fatalln(msg.Err)}
 
