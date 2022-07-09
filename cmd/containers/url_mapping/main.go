@@ -1,13 +1,25 @@
 package main
 
 import (
-	"log"
+	"core/kafka"
 	"core/proto"
+	"log"
 	"url_mapping/da"
+	"url_mapping/message"
 )
 
 func getMsgHeaderUrl(msg *proto.MSAMessage) string {
 	return msg.GetHeader().GetUrl()
+}
+
+func sendErrMessage(origin *proto.MSAMessage,err error) error {
+	errMsg := message.MakeErrorMessage(origin,err)
+	return kafka.SendMessage(&errMsg)
+}
+
+func sendOkMessage(origin *proto.MSAMessage,levels []int)error {
+	msg := message.MakeOkMessage(origin,levels)
+	return kafka.SendMessage(&msg)
 }
 
 func main() {
@@ -20,7 +32,13 @@ func main() {
 		levels,err := da.SelectUrlLevel(db,url)
 
 		if err != nil {
-			
+			err = sendErrMessage(&msg.Message,err)
+			if err != nil {log.Fatalln(err)}
+			continue
+		}
+
+		if err = sendOkMessage(&msg.Message,levels);err != nil {
+			log.Fatalln(err)
 		}
 	}
 }
