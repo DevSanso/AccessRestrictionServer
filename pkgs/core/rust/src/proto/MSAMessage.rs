@@ -33,6 +33,8 @@ pub struct MSAMessage {
     pub header: ::protobuf::MessageField<super::MSAHeader::MSAHeader>,
     // @@protoc_insertion_point(field:proto.MSAMessage.httpBody)
     pub httpBody: ::std::string::String,
+    // @@protoc_insertion_point(field:proto.MSAMessage.messageBody)
+    pub messageBody: ::std::string::String,
     // special fields
     // @@protoc_insertion_point(special_field:proto.MSAMessage.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -50,7 +52,7 @@ impl MSAMessage {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(2);
+        let mut fields = ::std::vec::Vec::with_capacity(3);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_message_field_accessor::<_, super::MSAHeader::MSAHeader>(
             "header",
@@ -61,6 +63,11 @@ impl MSAMessage {
             "httpBody",
             |m: &MSAMessage| { &m.httpBody },
             |m: &mut MSAMessage| { &mut m.httpBody },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "messageBody",
+            |m: &MSAMessage| { &m.messageBody },
+            |m: &mut MSAMessage| { &mut m.messageBody },
         ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<MSAMessage>(
             "MSAMessage",
@@ -86,6 +93,9 @@ impl ::protobuf::Message for MSAMessage {
                 18 => {
                     self.httpBody = is.read_string()?;
                 },
+                26 => {
+                    self.messageBody = is.read_string()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -105,6 +115,9 @@ impl ::protobuf::Message for MSAMessage {
         if !self.httpBody.is_empty() {
             my_size += ::protobuf::rt::string_size(2, &self.httpBody);
         }
+        if !self.messageBody.is_empty() {
+            my_size += ::protobuf::rt::string_size(3, &self.messageBody);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -116,6 +129,9 @@ impl ::protobuf::Message for MSAMessage {
         }
         if !self.httpBody.is_empty() {
             os.write_string(2, &self.httpBody)?;
+        }
+        if !self.messageBody.is_empty() {
+            os.write_string(3, &self.messageBody)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -136,6 +152,7 @@ impl ::protobuf::Message for MSAMessage {
     fn clear(&mut self) {
         self.header.clear();
         self.httpBody.clear();
+        self.messageBody.clear();
         self.special_fields.clear();
     }
 
@@ -143,6 +160,7 @@ impl ::protobuf::Message for MSAMessage {
         static instance: MSAMessage = MSAMessage {
             header: ::protobuf::MessageField::none(),
             httpBody: ::std::string::String::new(),
+            messageBody: ::std::string::String::new(),
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -167,19 +185,22 @@ impl ::protobuf::reflect::ProtobufValue for MSAMessage {
 }
 
 static file_descriptor_proto_data: &'static [u8] = b"\
-    \n\x10MSAMessage.proto\x12\x05proto\x1a\x0fMSAHeader.proto\"R\n\nMSAMess\
+    \n\x10MSAMessage.proto\x12\x05proto\x1a\x0fMSAHeader.proto\"t\n\nMSAMess\
     age\x12(\n\x06header\x18\x01\x20\x01(\x0b2\x10.proto.MSAHeaderR\x06heade\
-    r\x12\x1a\n\x08httpBody\x18\x02\x20\x01(\tR\x08httpBodyB\nZ\x08../protoJ\
-    \xc2\x01\n\x06\x12\x04\0\0\n\x01\n\x08\n\x01\x0c\x12\x03\0\0\x12\n\x08\n\
-    \x01\x02\x12\x03\x01\0\x0e\n\x08\n\x01\x08\x12\x03\x02\0\x1f\n\t\n\x02\
-    \x08\x0b\x12\x03\x02\0\x1f\n\t\n\x02\x03\0\x12\x03\x03\0\x19\n\n\n\x02\
-    \x04\0\x12\x04\x07\0\n\x01\n\n\n\x03\x04\0\x01\x12\x03\x07\x08\x12\n\x0b\
-    \n\x04\x04\0\x02\0\x12\x03\x08\x04\x19\n\x0c\n\x05\x04\0\x02\0\x06\x12\
-    \x03\x08\x04\r\n\x0c\n\x05\x04\0\x02\0\x01\x12\x03\x08\x0e\x14\n\x0c\n\
-    \x05\x04\0\x02\0\x03\x12\x03\x08\x17\x18\n\x0b\n\x04\x04\0\x02\x01\x12\
-    \x03\t\x04\x18\n\x0c\n\x05\x04\0\x02\x01\x05\x12\x03\t\x04\n\n\x0c\n\x05\
-    \x04\0\x02\x01\x01\x12\x03\t\x0b\x13\n\x0c\n\x05\x04\0\x02\x01\x03\x12\
-    \x03\t\x16\x17b\x06proto3\
+    r\x12\x1a\n\x08httpBody\x18\x02\x20\x01(\tR\x08httpBody\x12\x20\n\x0bmes\
+    sageBody\x18\x03\x20\x01(\tR\x0bmessageBodyB\nZ\x08../protoJ\xf9\x01\n\
+    \x06\x12\x04\0\0\x0b\x01\n\x08\n\x01\x0c\x12\x03\0\0\x12\n\x08\n\x01\x02\
+    \x12\x03\x01\0\x0e\n\x08\n\x01\x08\x12\x03\x02\0\x1f\n\t\n\x02\x08\x0b\
+    \x12\x03\x02\0\x1f\n\t\n\x02\x03\0\x12\x03\x03\0\x19\n\n\n\x02\x04\0\x12\
+    \x04\x07\0\x0b\x01\n\n\n\x03\x04\0\x01\x12\x03\x07\x08\x12\n\x0b\n\x04\
+    \x04\0\x02\0\x12\x03\x08\x04\x19\n\x0c\n\x05\x04\0\x02\0\x06\x12\x03\x08\
+    \x04\r\n\x0c\n\x05\x04\0\x02\0\x01\x12\x03\x08\x0e\x14\n\x0c\n\x05\x04\0\
+    \x02\0\x03\x12\x03\x08\x17\x18\n\x0b\n\x04\x04\0\x02\x01\x12\x03\t\x04\
+    \x18\n\x0c\n\x05\x04\0\x02\x01\x05\x12\x03\t\x04\n\n\x0c\n\x05\x04\0\x02\
+    \x01\x01\x12\x03\t\x0b\x13\n\x0c\n\x05\x04\0\x02\x01\x03\x12\x03\t\x16\
+    \x17\n\x0b\n\x04\x04\0\x02\x02\x12\x03\n\x04\x1b\n\x0c\n\x05\x04\0\x02\
+    \x02\x05\x12\x03\n\x04\n\n\x0c\n\x05\x04\0\x02\x02\x01\x12\x03\n\x0b\x16\
+    \n\x0c\n\x05\x04\0\x02\x02\x03\x12\x03\n\x19\x1ab\x06proto3\
 ";
 
 /// `FileDescriptorProto` object which was a source for this generated file

@@ -8,4 +8,5 @@ import "MSAHeader.proto";
 message MSAMessage {
     MSAHeader header = 1;
     string httpBody = 2;
+    string messageBody = 3;
 }

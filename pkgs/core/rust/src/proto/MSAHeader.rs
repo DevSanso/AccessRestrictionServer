@@ -29,8 +29,8 @@ const _PROTOBUF_VERSION_CHECK: () = ::protobuf::VERSION_3_0_3;
 // @@protoc_insertion_point(message:proto.MSAHeader)
 pub struct MSAHeader {
     // message fields
-    // @@protoc_insertion_point(field:proto.MSAHeader.requester_id)
-    pub requester_id: ::std::string::String,
+    // @@protoc_insertion_point(field:proto.MSAHeader.sender_id)
+    pub sender_id: ::std::string::String,
     // @@protoc_insertion_point(field:proto.MSAHeader.message_uuid)
     pub message_uuid: ::std::string::String,
     // @@protoc_insertion_point(field:proto.MSAHeader.type)
@@ -67,9 +67,9 @@ impl MSAHeader {
         let mut fields = ::std::vec::Vec::with_capacity(9);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
-            "requester_id",
-            |m: &MSAHeader| { &m.requester_id },
-            |m: &mut MSAHeader| { &mut m.requester_id },
+            "sender_id",
+            |m: &MSAHeader| { &m.sender_id },
+            |m: &mut MSAHeader| { &mut m.sender_id },
         ));
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "message_uuid",
@@ -130,7 +130,7 @@ impl ::protobuf::Message for MSAHeader {
         while let Some(tag) = is.read_raw_tag_or_eof()? {
             match tag {
                 10 => {
-                    self.requester_id = is.read_string()?;
+                    self.sender_id = is.read_string()?;
                 },
                 18 => {
                     self.message_uuid = is.read_string()?;
@@ -168,8 +168,8 @@ impl ::protobuf::Message for MSAHeader {
     #[allow(unused_variables)]
     fn compute_size(&self) -> u64 {
         let mut my_size = 0;
-        if !self.requester_id.is_empty() {
-            my_size += ::protobuf::rt::string_size(1, &self.requester_id);
+        if !self.sender_id.is_empty() {
+            my_size += ::protobuf::rt::string_size(1, &self.sender_id);
         }
         if !self.message_uuid.is_empty() {
             my_size += ::protobuf::rt::string_size(2, &self.message_uuid);
@@ -201,8 +201,8 @@ impl ::protobuf::Message for MSAHeader {
     }
 
     fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
-        if !self.requester_id.is_empty() {
-            os.write_string(1, &self.requester_id)?;
+        if !self.sender_id.is_empty() {
+            os.write_string(1, &self.sender_id)?;
         }
         if !self.message_uuid.is_empty() {
             os.write_string(2, &self.message_uuid)?;
@@ -245,7 +245,7 @@ impl ::protobuf::Message for MSAHeader {
     }
 
     fn clear(&mut self) {
-        self.requester_id.clear();
+        self.sender_id.clear();
         self.message_uuid.clear();
         self.type_ = ::protobuf::EnumOrUnknown::new(msaheader::Type::General);
         self.url.clear();
@@ -259,7 +259,7 @@ impl ::protobuf::Message for MSAHeader {
 
     fn default_instance() -> &'static MSAHeader {
         static instance: MSAHeader = MSAHeader {
-            requester_id: ::std::string::String::new(),
+            sender_id: ::std::string::String::new(),
             message_uuid: ::std::string::String::new(),
             type_: ::protobuf::EnumOrUnknown::from_i32(0),
             url: ::std::string::String::new(),
@@ -403,13 +403,13 @@ pub mod msaheader {
 }
 
 static file_descriptor_proto_data: &'static [u8] = b"\
-    \n\x0fMSAHeader.proto\x12\x05proto\"\xfa\x02\n\tMSAHeader\x12!\n\x0crequ\
-    ester_id\x18\x01\x20\x01(\tR\x0brequesterId\x12!\n\x0cmessage_uuid\x18\
-    \x02\x20\x01(\tR\x0bmessageUuid\x12)\n\x04type\x18\x03\x20\x01(\x0e2\x15\
-    .proto.MSAHeader.TypeR\x04type\x12\x10\n\x03url\x18\x04\x20\x01(\tR\x03u\
-    rl\x12\x16\n\x06method\x18\x05\x20\x01(\tR\x06method\x12#\n\rmessage_ind\
-    ex\x18\x06\x20\x01(\x05R\x0cmessageIndex\x12,\n\x05state\x18\x07\x20\x01\
-    (\x0e2\x16.proto.MSAHeader.StateR\x05state\x12\x17\n\x07is_next\x18\x08\
+    \n\x0fMSAHeader.proto\x12\x05proto\"\xf4\x02\n\tMSAHeader\x12\x1b\n\tsen\
+    der_id\x18\x01\x20\x01(\tR\x08senderId\x12!\n\x0cmessage_uuid\x18\x02\
+    \x20\x01(\tR\x0bmessageUuid\x12)\n\x04type\x18\x03\x20\x01(\x0e2\x15.pro\
+    to.MSAHeader.TypeR\x04type\x12\x10\n\x03url\x18\x04\x20\x01(\tR\x03url\
+    \x12\x16\n\x06method\x18\x05\x20\x01(\tR\x06method\x12#\n\rmessage_index\
+    \x18\x06\x20\x01(\x05R\x0cmessageIndex\x12,\n\x05state\x18\x07\x20\x01(\
+    \x0e2\x16.proto.MSAHeader.StateR\x05state\x12\x17\n\x07is_next\x18\x08\
     \x20\x01(\x08R\x06isNext\x12\x1f\n\x0bhttp_header\x18\t\x20\x01(\tR\nhtt\
     pHeader\"$\n\x04Type\x12\x0b\n\x07General\x10\0\x12\x0f\n\x0bLinkRequest\
     \x10\x01\"\x1f\n\x05State\x12\t\n\x05Error\x10\0\x12\x0b\n\x07Success\
@@ -417,9 +417,9 @@ static file_descriptor_proto_data: &'static [u8] = b"\
     \x0c\x12\x03\0\0\x12\n\x08\n\x01\x02\x12\x03\x01\0\x0e\n\x08\n\x01\x08\
     \x12\x03\x03\0\x1f\n\t\n\x02\x08\x0b\x12\x03\x03\0\x1f\n\n\n\x02\x04\0\
     \x12\x04\x04\0\x17\x01\n\n\n\x03\x04\0\x01\x12\x03\x04\x08\x11\n\x0b\n\
-    \x04\x04\0\x02\0\x12\x03\x05\x04\x1c\n\x0c\n\x05\x04\0\x02\0\x05\x12\x03\
-    \x05\x04\n\n\x0c\n\x05\x04\0\x02\0\x01\x12\x03\x05\x0b\x17\n\x0c\n\x05\
-    \x04\0\x02\0\x03\x12\x03\x05\x1a\x1b\n\x0b\n\x04\x04\0\x02\x01\x12\x03\
+    \x04\x04\0\x02\0\x12\x03\x05\x04\x19\n\x0c\n\x05\x04\0\x02\0\x05\x12\x03\
+    \x05\x04\n\n\x0c\n\x05\x04\0\x02\0\x01\x12\x03\x05\x0b\x14\n\x0c\n\x05\
+    \x04\0\x02\0\x03\x12\x03\x05\x17\x18\n\x0b\n\x04\x04\0\x02\x01\x12\x03\
     \x06\x04\x1c\n\x0c\n\x05\x04\0\x02\x01\x05\x12\x03\x06\x04\n\n\x0c\n\x05\
     \x04\0\x02\x01\x01\x12\x03\x06\x0b\x17\n\x0c\n\x05\x04\0\x02\x01\x03\x12\
     \x03\x06\x1a\x1b\n\x0c\n\x04\x04\0\x04\0\x12\x04\x07\x04\n\x05\n\x0c\n\
