@@ -1,7 +1,6 @@
 package kafka_test
 
 import (
-	"core/config"
 	"core/kafka"
 	"core/proto"
 	"core/utils/tests"
@@ -9,7 +8,6 @@ import (
 )
 
 func TestSend(t *testing.T) {
-	config.InitEnv()
 
 	header := tests.NewHeader()
 	var msg proto.MSAMessage
