@@ -3,7 +3,7 @@ package proto;
 
 option go_package = "../proto";
 message MSAHeader{
-    string requester_id = 1;
+    string sender_id = 1;
     string message_uuid = 2;
     enum Type {
         General = 0;

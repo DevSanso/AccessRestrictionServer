@@ -23,20 +23,20 @@ object MSAHeaderKt {
     internal fun _build(): proto.MSAHeaderOuterClass.MSAHeader = _builder.build()
 
     /**
-     * <code>string requester_id = 1;</code>
+     * <code>string sender_id = 1;</code>
      */
-    var requesterId: kotlin.String
-      @JvmName("getRequesterId")
-      get() = _builder.getRequesterId()
-      @JvmName("setRequesterId")
+    var senderId: kotlin.String
+      @JvmName("getSenderId")
+      get() = _builder.getSenderId()
+      @JvmName("setSenderId")
       set(value) {
-        _builder.setRequesterId(value)
+        _builder.setSenderId(value)
       }
     /**
-     * <code>string requester_id = 1;</code>
+     * <code>string sender_id = 1;</code>
      */
-    fun clearRequesterId() {
-      _builder.clearRequesterId()
+    fun clearSenderId() {
+      _builder.clearSenderId()
     }
 
     /**
