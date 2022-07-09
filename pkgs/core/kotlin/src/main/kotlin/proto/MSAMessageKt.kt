@@ -62,6 +62,23 @@ object MSAMessageKt {
     fun clearHttpBody() {
       _builder.clearHttpBody()
     }
+
+    /**
+     * <code>string messageBody = 3;</code>
+     */
+    var messageBody: kotlin.String
+      @JvmName("getMessageBody")
+      get() = _builder.getMessageBody()
+      @JvmName("setMessageBody")
+      set(value) {
+        _builder.setMessageBody(value)
+      }
+    /**
+     * <code>string messageBody = 3;</code>
+     */
+    fun clearMessageBody() {
+      _builder.clearMessageBody()
+    }
   }
 }
 @kotlin.jvm.JvmSynthetic
