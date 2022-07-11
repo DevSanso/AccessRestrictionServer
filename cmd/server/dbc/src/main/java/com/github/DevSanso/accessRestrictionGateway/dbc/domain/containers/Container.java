@@ -1,11 +1,11 @@
-package com.github.DevSanso.accessRestrictionGateway.dbc.entity;
+package com.github.DevSanso.accessRestrictionGateway.dbc.domain.containers;
 
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "container")
-public class ContainerEntity {
+public class Container {
     @Column
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
