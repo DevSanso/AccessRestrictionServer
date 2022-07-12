@@ -12,4 +12,5 @@ import org.springframework.stereotype.Component
 class KafkaConfigure {
     lateinit var address : String
     lateinit var thisTopicName : String
+    lateinit var consumerGroupId : String
 }
